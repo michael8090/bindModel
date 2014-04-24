@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="underscore.js"></script>
+    <script src="Model.js"></script>
+</head>
+<body>
+<script>
+    var app = new Obj({
+        init: function() {
+            var input = document.createElement('input');
+            input.placeholder = 'input to change model';
+            input.model = app.model.data.background;
+            input.onkeyup = function() {
+                input.model.setValue(input.value);
+            };
+            document.body.appendChild(input);
+            app.addEventListener(input.model, 'valueChanged', function(event) {
+                document.body.style.background = event.newValue;
+            });
+        },
+        model: new Model({
+            data: {
+                background: 'gray'
+            }
+        })
+    });
+    app.init();
+</script>
+</body>
+</html>
